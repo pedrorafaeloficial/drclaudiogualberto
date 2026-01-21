@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula Gratuita: Análise de Extrato com IA - Dr. Claudio Gualberto</title>
+    <meta name="description" content="Aprenda a usar o ChatGPT para identificar cobranças indevidas no seu benefício. Aula gratuita com Dr. Claudio Gualberto.">
+    
+    <!-- Google Fonts: Playfair Display (Autoridade/Serifa) e Inter (Leitura/Sem Serifa) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (Framework para Design Responsivo e Moderno) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Configurações Personalizadas do Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0F172A',    /* Azul Escuro Profundo */
+                            primary: '#1E293B', /* Azul Petróleo */
+                            gold: '#D4AF37',    /* Dourado Clássico */
+                            goldLight: '#F3E5AB',
+                            accent: '#ef4444',  /* Vermelho para erros/atenção */
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Efeitos visuais extras */
+        .gold-gradient-text {
+            background: linear-gradient(to right, #D4AF37, #F3E5AB, #D4AF37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        .hero-bg {
+            background-image: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.95)), url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Checkbox customizado */
+        .checkbox-wrapper input:checked + div {
+            background-color: #D4AF37;
+            border-color: #D4AF37;
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-700 antialiased bg-slate-50">
+
+    <!-- Modal de Sucesso (Escondido por padrão) -->
+    <div id="successModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-80 backdrop-blur-sm">
+        <div class="bg-white rounded-lg shadow-2xl p-8 max-w-md w-full mx-4 transform transition-all scale-100 text-center border-t-4 border-brand-gold">
+            <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-6">
+                <i data-lucide="check" class="h-8 w-8 text-green-600"></i>
+            </div>
+            <h3 class="text-2xl font-serif font-bold text-brand-dark mb-2">Inscrição Confirmada!</h3>
+            <p class="text-gray-600 mb-6">Você receberá o link de acesso à aula exclusiva no seu e-mail e WhatsApp em instantes.</p>
+            <button onclick="closeModal()" class="w-full bg-brand-gold hover:bg-yellow-600 text-brand-dark font-bold py-3 px-4 rounded transition duration-300">
+                Entendido
+            </button>
+        </div>
+    </div>
+
+    <!-- Barra de Aviso Superior -->
+    <div class="bg-brand-gold text-brand-dark text-xs md:text-sm font-bold py-2 text-center uppercase tracking-wider">
+        ⚠️ Atenção: Aula disponível por tempo limitado
+    </div>
+
+    <!-- Hero Section (Área Principal) -->
+    <header class="hero-bg min-h-screen lg:min-h-[90vh] flex items-center relative pb-32">
+        <div class="container mx-auto px-4 pt-10 lg:pt-0 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Texto de Venda (Esquerda) -->
+                <div class="text-white space-y-6">
+                    <div class="inline-flex items-center bg-slate-800/80 border border-brand-gold/30 rounded-full px-4 py-1.5 mb-4">
+                        <span class="w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse"></span>
+                        <span class="text-xs font-medium tracking-wide text-brand-goldLight uppercase">Método Comprovado</span>
+                    </div>
+                    
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold leading-tight">
+                        Suspeita de descontos indevidos no seu benefício?
+                        <br>
+                        <span class="gold-gradient-text">Descubra a verdade em segundos.</span>
+                    </h1>
+                    
+                    <p class="text-lg md:text-xl text-slate-300 leading-relaxed max-w-xl">
+                        Aprenda a usar a Inteligência Artificial (ChatGPT) para analisar seu extrato bancário, identificar juros abusivos, venda casada e recuperar o que é seu por direito.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 pt-4 text-sm text-slate-400">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="shield-check" class="text-brand-gold w-5 h-5"></i>
+                            <span>100% Gratuito</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="lock" class="text-brand-gold w-5 h-5"></i>
+                            <span>Dados Seguros</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="zap" class="text-brand-gold w-5 h-5"></i>
+                            <span>Resultado Rápido</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulário de Captura (Direita) -->
+                <div class="bg-white p-8 rounded-xl shadow-2xl border border-slate-200 relative overflow-hidden group">
+                    <!-- Efeito de brilho no topo do card -->
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-gold via-yellow-300 to-brand-gold"></div>
+                    
+                    <h2 class="text-2xl font-serif font-bold text-brand-dark mb-2 text-center">Garanta sua Vaga na Aula</h2>
+                    <p class="text-center text-slate-500 text-sm mb-6">Preencha abaixo para receber o script da IA e o acesso à aula.</p>
+                    
+                    <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Seu Nome Completo</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i data-lucide="user" class="h-5 w-5 text-slate-400"></i>
+                                </div>
+                                <input type="text" id="name" required placeholder="Ex: João Silva" class="block w-full pl-10 pr-3 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-gold focus:border-brand-gold transition-colors outline-none">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Seu Melhor E-mail</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i data-lucide="mail" class="h-5 w-5 text-slate-400"></i>
+                                </div>
+                                <input type="email" id="email" required placeholder="Ex: joao@email.com" class="block w-full pl-10 pr-3 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-gold focus:border-brand-gold transition-colors outline-none">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-slate-700 mb-1">WhatsApp (com DDD)</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i data-lucide="phone" class="h-5 w-5 text-slate-400"></i>
+                                </div>
+                                <input type="tel" id="phone" required placeholder="(11) 99999-9999" class="block w-full pl-10 pr-3 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-gold focus:border-brand-gold transition-colors outline-none">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full bg-brand-dark hover:bg-slate-900 text-brand-gold font-bold text-lg py-4 px-4 rounded-lg shadow-lg hover:shadow-xl transform transition hover:-translate-y-0.5 duration-200 border border-brand-gold/20 flex justify-center items-center gap-2">
+                            <span>QUERO ACESSAR A AULA</span>
+                            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        </button>
+
+                        <p class="text-xs text-slate-400 text-center mt-4">
+                            <i data-lucide="lock" class="inline w-3 h-3 mb-0.5"></i> Seus dados estão seguros. Não enviamos spam.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Onda divisória SVG -->
+        <div class="absolute bottom-0 w-full overflow-hidden leading-none z-0">
+            <svg class="relative block w-full h-16 md:h-32" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
+                <path class="fill-slate-50" fill-opacity="1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,202.7C1248,181,1344,171,1392,165.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+    </header>
+
+    <!-- O Problema vs Solução -->
+    <section class="py-20 px-4">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <span class="text-brand-gold font-bold tracking-wider uppercase text-sm">O Cenário Atual</span>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-brand-dark mt-2">O Extrato do seu Benefício Esconde Segredos</h2>
+                <div class="w-24 h-1 bg-brand-gold mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition duration-300 border-t-4 border-brand-accent">
+                    <div class="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mb-6 text-brand-accent">
+                        <i data-lucide="file-warning" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-3">A Confusão Bancária</h3>
+                    <p class="text-slate-600 leading-relaxed">Códigos como "RMC", taxas de juros compostos e siglas que ninguém explica são desenhados para confundir você e esconder cobranças ilegais.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition duration-300 border-t-4 border-brand-accent">
+                    <div class="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mb-6 text-brand-accent">
+                        <i data-lucide="link" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-3">Venda Casada</h3>
+                    <p class="text-slate-600 leading-relaxed">Muitos empréstimos consignados embutem seguros e cartões de crédito que você nunca pediu e nem sabia que estava pagando.</p>
+                </div>
+
+                <!-- Card 3 (A Solução) -->
+                <div class="bg-brand-dark p-8 rounded-xl shadow-xl border border-brand-gold relative transform md:-translate-y-4">
+                    <div class="absolute -top-4 right-4 bg-brand-gold text-brand-dark text-xs font-bold px-3 py-1 rounded-full">A SOLUÇÃO NOVA</div>
+                    <div class="w-14 h-14 bg-slate-700 rounded-full flex items-center justify-center mb-6 text-brand-gold">
+                        <i data-lucide="bot" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">A Auditoria via IA</h3>
+                    <p class="text-slate-300 leading-relaxed">O ChatGPT não se cansa e não se confunde. Nesta aula, vou te dar o <strong>comando exato</strong> para ele ler seu extrato e apontar todos os erros em segundos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre o Especialista -->
+    <section class="bg-slate-200 py-20 relative">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center gap-12 max-w-6xl mx-auto">
+                <div class="md:w-1/2 relative">
+                    <!-- Moldura da foto -->
+                    <div class="absolute top-4 -left-4 w-full h-full border-2 border-brand-gold rounded-lg"></div>
+                    <!-- Placeholder para foto do Dr. Claudio -->
+                    <div class="bg-slate-300 aspect-[3/4] rounded-lg shadow-lg overflow-hidden relative z-10 flex items-center justify-center">
+                        <img src="/assets/images/foto.png" alt="Dr. Claudio Gualberto" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2">
+                    <h4 class="text-brand-gold font-bold uppercase tracking-widest mb-2">Seu Mentor</h4>
+                    <h2 class="text-4xl font-serif font-bold text-brand-dark mb-6">Dr. Claudio Gualberto</h2>
+                    <div class="space-y-4 text-slate-700 text-lg leading-relaxed">
+                        <p>
+                            Especialista em Direito do Consumidor Bancário e Previdenciário, Dr. Claudio já ajudou centenas de aposentados e pensionistas a recuperarem valores descontados indevidamente de seus benefícios.
+                        </p>
+                        <p>
+                            Agora, ele inova ao trazer a tecnologia para o lado do consumidor. Sua missão é democratizar a "Auditoria Bancária" permitindo que qualquer pessoa, mesmo sem conhecimento técnico, possa auditar suas próprias contas usando ferramentas gratuitas de Inteligência Artificial.
+                        </p>
+                    </div>
+                    
+                    <div class="mt-8 grid grid-cols-2 gap-4">
+                        <div class="border-l-4 border-brand-dark pl-4">
+                            <span class="block text-3xl font-bold text-brand-dark">+1.000</span>
+                            <span class="text-sm text-slate-600">Casos Analisados</span>
+                        </div>
+                        <div class="border-l-4 border-brand-gold pl-4">
+                            <span class="block text-3xl font-bold text-brand-dark">Especialista</span>
+                            <span class="text-sm text-slate-600">Combate a Abusos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conteúdo da Aula (Checklist) -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold text-center text-brand-dark mb-12">O que você vai dominar nesta aula:</h2>
+            
+            <div class="space-y-6">
+                <!-- Item 1 -->
+                <div class="flex items-start gap-4 p-4 rounded-lg hover:bg-slate-50 transition">
+                    <div class="flex-shrink-0 mt-1">
+                        <div class="w-8 h-8 rounded-full bg-brand-gold flex items-center justify-center text-brand-dark font-bold">1</div>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold text-brand-dark">O Prompt "Caça-Fraude"</h4>
+                        <p class="text-slate-600">Vou te entregar o texto exato (copia e cola) que você deve enviar ao ChatGPT para ele agir como um perito bancário.</p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="flex items-start gap-4 p-4 rounded-lg hover:bg-slate-50 transition">
+                    <div class="flex-shrink-0 mt-1">
+                        <div class="w-8 h-8 rounded-full bg-brand-gold flex items-center justify-center text-brand-dark font-bold">2</div>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold text-brand-dark">Leitura de "Extrato Sopa de Letrinhas"</h4>
+                        <p class="text-slate-600">Como pegar aquele PDF do banco ou do INSS que ninguém entende e transformar em uma tabela clara de débitos.</p>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="flex items-start gap-4 p-4 rounded-lg hover:bg-slate-50 transition">
+                    <div class="flex-shrink-0 mt-1">
+                        <div class="w-8 h-8 rounded-full bg-brand-gold flex items-center justify-center text-brand-dark font-bold">3</div>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold text-brand-dark">O Próximo Passo Jurídico</h4>
+                        <p class="text-slate-600">A IA achou o erro? Eu vou te explicar o que fazer com essa informação para buscar o ressarcimento (muitas vezes em dobro).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botão CTA Secundário -->
+            <div class="mt-12 text-center">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="bg-brand-dark hover:bg-slate-900 text-white font-bold py-4 px-10 rounded-full shadow-lg transition transform hover:scale-105 border-2 border-brand-gold">
+                    Quero Fazer Minha Inscrição Gratuita
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark text-slate-400 py-12 border-t border-slate-800">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h5 class="text-white font-serif font-bold text-lg mb-4">Dr. Claudio Gualberto</h5>
+                    <p class="text-sm">Advocacia especializada em proteger o seu patrimônio contra abusos do sistema financeiro.</p>
+                </div>
+                <div>
+                    <h5 class="text-white font-serif font-bold text-lg mb-4">Links Importantes</h5>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-brand-gold transition">Política de Privacidade</a></li>
+                        <li><a href="#" class="hover:text-brand-gold transition">Termos de Uso</a></li>
+                        <li><a href="#" class="hover:text-brand-gold transition">Sobre o Escritório</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-white font-serif font-bold text-lg mb-4">Contato</h5>
+                    <p class="text-sm mb-2"><i data-lucide="mail" class="inline w-4 h-4 mr-2"></i> contato@drclaudio.com.br</p>
+                    <p class="text-sm"><i data-lucide="map-pin" class="inline w-4 h-4 mr-2"></i> São Paulo, SP</p>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 pt-8 text-center text-xs">
+                <p>&copy; 2023 Claudio Gualberto Advocacia. Todos os direitos reservados.</p>
+                <p class="mt-2 text-slate-600">Este site não possui vínculo com o INSS, Facebook ou OpenAI. ChatGPT é uma marca registrada da OpenAI.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Inicializar ícones Lucide
+        lucide.createIcons();
+
+        // Função de manipulação do formulário
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const btn = event.target.querySelector('button');
+            const originalText = btn.innerHTML;
+            
+            // Capturar dados
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+
+            // Estado de carregamento
+            btn.disabled = true;
+            btn.innerHTML = '<i data-lucide="loader-2" class="animate-spin mr-2"></i> Enviando...';
+            lucide.createIcons();
+
+            try {
+                // Enviar para o Webhook
+                const response = await fetch('https://automacao.agenciafoxon.com.br/webhook/drclaudio', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        date: new Date().toISOString()
+                    })
+                });
+
+                // Se der tudo certo (status 200-299), redireciona
+                if (response.ok) {
+                    window.location.href = 'https://drclaudiogualberto.com.br/aula';
+                } else {
+                    // Se o webhook retornar erro, tentamos redirecionar mesmo assim 
+                    // (fallback comum em páginas de captura para não perder o lead visualmente)
+                    console.warn('Webhook retornou erro, redirecionando via fallback.');
+                    window.location.href = 'https://drclaudiogualberto.com.br/aula';
+                }
+
+            } catch (error) {
+                console.error('Erro de conexão:', error);
+                // Fallback de segurança em caso de erro de rede (CORS, Blockers, etc)
+                // Garante que o usuário chegue na aula mesmo se a automação falhar
+                window.location.href = 'https://drclaudiogualberto.com.br/aula';
+            }
+        }
+
+        // Fechar modal (Código mantido caso queira reativar o modal no futuro, mas não será usado agora)
+        function closeModal() {
+            document.getElementById('successModal').classList.add('hidden');
+        }
+
+        // Fechar modal se clicar fora
+        document.getElementById('successModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
