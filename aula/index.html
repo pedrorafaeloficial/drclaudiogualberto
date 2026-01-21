@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula Exclusiva: Auditoria com IA - Dr. Claudio Gualberto</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Configurações de Estilo (Mesmo padrão da Landing Page) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0F172A',    
+                            primary: '#1E293B', 
+                            gold: '#D4AF37',    
+                            goldLight: '#F3E5AB',
+                            accent: '#ef4444', 
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Gradiente Dourado */
+        .gold-gradient-text {
+            background: linear-gradient(to right, #D4AF37, #F3E5AB, #D4AF37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        /* Estilo do Player de Vídeo */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-700 antialiased bg-slate-50">
+
+    <!-- Header Simplificado -->
+    <nav class="bg-brand-dark border-b border-slate-800 py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <!-- Ícone/Logo Simples -->
+                <div class="w-8 h-8 bg-brand-gold rounded flex items-center justify-center text-brand-dark font-bold font-serif">C</div>
+                <span class="text-white font-serif font-bold tracking-wide">Dr. Claudio Gualberto</span>
+            </div>
+            <span class="text-brand-gold text-xs uppercase tracking-widest font-bold border border-brand-gold px-3 py-1 rounded-full">Aula Exclusiva</span>
+        </div>
+    </nav>
+
+    <!-- Área do Vídeo -->
+    <section class="bg-brand-dark relative pb-20 pt-10">
+        <!-- Fundo decorativo -->
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 pointer-events-none"></div>
+        
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-8">
+                <h1 class="text-2xl md:text-4xl font-serif font-bold text-white mb-2">
+                    Como Usar o ChatGPT para <span class="gold-gradient-text">Analisar seu Extrato</span>
+                </h1>
+                <p class="text-slate-400">Assista abaixo o passo a passo completo para identificar cobranças indevidas.</p>
+            </div>
+
+            <!-- Container do Vídeo -->
+            <div class="bg-black rounded-xl overflow-hidden video-container shadow-2xl">
+                <iframe 
+                    src="https://www.youtube.com/embed/villpFTepsM?rel=0&modestbranding=1&showinfo=0" 
+                    title="Aula Exclusiva Dr. Claudio Gualberto" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <!-- Botão Agente GPT -->
+            <div class="mt-8 mb-4 text-center">
+                <a href="https://chatgpt.com/g/g-68d1df86ac648191a29b5eea24d7e5a4-assessor-gpt-cobrancas-indevidas-e-venda-casada" target="_blank" class="inline-flex items-center justify-center gap-3 bg-brand-gold hover:bg-yellow-500 text-brand-dark font-bold py-4 px-6 md:px-10 rounded-lg shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:shadow-[0_0_30px_rgba(212,175,55,0.5)] transition-all transform hover:-translate-y-1 border border-yellow-400 text-lg w-full md:w-auto group">
+                    <div class="bg-brand-dark p-1.5 rounded-full text-brand-gold group-hover:text-white transition-colors">
+                        <i data-lucide="bot" class="w-6 h-6"></i>
+                    </div>
+                    <span>Acesse aqui o agente de cobranças indevidas do Dr Claudio pelo ChatGPT</span>
+                    <i data-lucide="external-link" class="w-5 h-5 opacity-70"></i>
+                </a>
+            </div>
+
+            <!-- Status da Aula -->
+            <div class="mt-6 flex flex-col md:flex-row items-center justify-between text-slate-400 text-sm bg-brand-primary/50 p-4 rounded-lg border border-slate-700">
+                <div class="flex items-center gap-2 mb-2 md:mb-0">
+                    <i data-lucide="eye" class="w-4 h-4 text-brand-gold"></i>
+                    <span>Aula liberada por tempo limitado</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button onclick="sharePage()" class="flex items-center gap-2 hover:text-white transition">
+                        <i data-lucide="share-2" class="w-4 h-4"></i> Compartilhar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Área de Materiais e Próximos Passos -->
+    <section class="py-16 px-4 -mt-10 relative z-10">
+        <div class="container mx-auto max-w-4xl">
+            
+            <!-- Material 1: O Prompt (Ação Principal) -->
+            <div class="bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden mb-10">
+                <div class="bg-slate-100 px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+                    <h3 class="font-bold text-brand-dark flex items-center gap-2">
+                        <i data-lucide="terminal" class="text-brand-gold"></i>
+                        O Prompt "Caça-Fraude"
+                    </h3>
+                    <span class="text-xs font-mono text-slate-500 bg-white px-2 py-1 rounded border">prompt_v1.txt</span>
+                </div>
+                <div class="p-6">
+                    <p class="text-sm text-slate-600 mb-4">Copie o texto abaixo e cole no ChatGPT junto com o texto do seu extrato bancário:</p>
+                    
+                    <div class="bg-slate-800 text-slate-300 p-4 rounded-lg font-mono text-sm relative group">
+                        <p id="promptText">
+                            "Atue como um perito bancário especialista em direito do consumidor (Brasil). Analise os dados do extrato bancário que vou colar abaixo. <br><br>
+                            Sua tarefa é identificar:<br>
+                            1. Siglas suspeitas (como RMC, RCC, Seguros não solicitados).<br>
+                            2. Descontos recorrentes que podem configurar venda casada.<br>
+                            3. Taxas de juros que pareçam estar muito acima da média de mercado para empréstimos consignados.<br><br>
+                            Por favor, liste cada item suspeito em uma tabela contendo: Data, Descrição, Valor e Motivo da Suspeita. Ao final, me diga o valor total estimado dessas cobranças."
+                        </p>
+                        
+                        <button onclick="copyPrompt()" class="absolute top-2 right-2 bg-brand-gold hover:bg-yellow-500 text-brand-dark text-xs font-bold px-3 py-1.5 rounded flex items-center gap-1 transition">
+                            <i data-lucide="copy" class="w-3 h-3"></i> Copiar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA: Encontrou problemas? -->
+            <div class="grid md:grid-cols-2 gap-8 items-center bg-brand-dark text-white p-8 rounded-xl border border-brand-gold shadow-2xl">
+                <div>
+                    <h3 class="text-2xl font-serif font-bold mb-2">A IA encontrou irregularidades?</h3>
+                    <p class="text-slate-300 mb-6">Se o ChatGPT apontou cobranças indevidas no seu extrato, o próximo passo é buscar a restituição desses valores.</p>
+                    
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-center gap-2 text-sm text-brand-goldLight">
+                            <i data-lucide="check-circle" class="w-4 h-4"></i> Análise jurídica do seu caso
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-brand-goldLight">
+                            <i data-lucide="check-circle" class="w-4 h-4"></i> Cálculo exato do reembolso
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col gap-4">
+                    <a href="https://wa.me/5521989866133?text=Ol%C3%A1%20Dr%20Claudio%2C%20fiz%20a%20aula%20e%20acho%20que%20fui%20cobrado%20indevidamente" target="_blank" class="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-6 rounded-lg text-center shadow-lg transition transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                        <i data-lucide="message-circle" class="w-5 h-5"></i>
+                        Falar com a Equipe no WhatsApp
+                    </a>
+                    <p class="text-xs text-center text-slate-500">Atendimento de Seg. a Sex. das 09h às 18h</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-primary text-slate-400 py-8 border-t border-slate-800 text-center text-sm">
+        <div class="container mx-auto px-4">
+            <img src="/assets/images/foto.png" alt="Dr Claudio" class="w-12 h-12 rounded-full mx-auto mb-4 object-cover border border-brand-gold">
+            <p class="mb-2">&copy; 2023 Dr. Claudio Gualberto Advocacia.</p>
+            <p class="text-slate-600 text-xs">Esta página é parte de um material educativo gratuito.</p>
+        </div>
+    </footer>
+
+    <!-- Notificação Flutuante (Toast) -->
+    <div id="toast" class="fixed bottom-4 right-4 bg-brand-dark text-white px-6 py-3 rounded-lg shadow-2xl border-l-4 border-brand-gold transform translate-y-20 opacity-0 transition-all duration-300 z-50 flex items-center gap-3">
+        <i data-lucide="check" class="text-green-400"></i>
+        <span>Prompt copiado com sucesso!</span>
+    </div>
+
+    <script>
+        // Inicializar ícones
+        lucide.createIcons();
+
+        // Função para copiar o prompt
+        function copyPrompt() {
+            const text = document.getElementById('promptText').innerText;
+            
+            // Copiar para área de transferência
+            navigator.clipboard.writeText(text).then(() => {
+                showToast();
+            }).catch(err => {
+                console.error('Erro ao copiar: ', err);
+            });
+        }
+
+        // Mostrar notificação
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Função placeholder de compartilhamento
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Aula: Auditoria de Extrato com IA',
+                    text: 'Veja como descobrir se tem cobranças indevidas no seu benefício usando Inteligência Artificial.',
+                    url: window.location.href,
+                });
+            } else {
+                alert('Copie o link desta página para compartilhar!');
+            }
+        }
+    </script>
+</body>
+</html>
